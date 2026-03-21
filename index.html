@@ -62,11 +62,116 @@
 				font-size : 1.5vh;
 			}
 			.orderInfoBox{
+				position: relative;
 				width : 26vw;
 				height : 10vh;
 				background-color : rgb(191,191,191);
 				margin-bottom : 2vh;
 				border-radius : 5vh;
+			}
+			.infoChecker{
+				position : absolute;
+				left : 1vw;
+				top : 2.5vh;
+				width : 2vw;
+				height : 5vh;
+				border-radius: 1vw; 
+				background-color : rgb(128,128,128);
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 1.5vh;
+				color: rgb(255,255,255);
+			}
+			.infoName{
+				position : absolute;
+				left : 3vw;
+				top : 1vh;
+				width : 11vw;
+				height : 6vh;
+				display : flex;
+				justify-content : flex-end ;
+				align-items : center;
+				font-size : 1.5vw;
+				color: rgb(0,0,0);
+			}
+			.infoType{
+				position : absolute;
+				left : 9vw;
+				top : 2vh;
+				width : 5vw;
+				height : 6vh;
+				display : flex;
+				justify-content : flex-end;
+				align-items : flex-end;
+				font-size : 1vw;
+				color: rgb(0,0,0);
+			}
+			.infoNum{
+				position : absolute;
+				left : 14vw;
+				top : 1vh;
+				width : 6vw;
+				height : 4vh;
+				display : flex;
+				justify-content : flex-end;
+				align-items : flex-end;
+				font-size : 1.3vw;
+				color: rgb(0,0,0);
+
+			}
+			.infoMoney{
+				position : absolute;
+				left : 14vw;
+				top : 5vh;
+				width : 6vw;
+				height : 4vh;
+				display : flex;
+				justify-content : flex-end;
+				align-items : flex-start;
+				font-size : 1.3vw;
+				color: rgb(0,0,0);
+
+			}
+			.infoPlus{
+				position : absolute;
+				left : 20.5vw;
+				top : 2.5vh;
+				width : 2vw;
+				height : 5vh;
+				border-radius: 1vw; 
+				background-color : rgb(128,128,128);
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 1.5vh;
+				color: rgb(255,255,255);
+			}
+			.infoMinus{
+				position : absolute;
+				left : 23vw;
+				top : 2.5vh;
+				width : 2vw;
+				height : 5vh;
+				border-radius: 1vw; 
+				background-color : rgb(255,50,50);
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 1.5vh;
+				color: rgb(255,255,255);
+			}
+			.infoSum{
+				position : absolute;
+				left : 2vw;
+				top : 1vh;
+				width : 22vw;
+				height : 6vh;
+				display : flex;
+				justify-content : center ;
+				align-items : center;
+				font-size : 1.5vw;
+				color: rgb(0,0,0);
 			}
 			.bottomBox{
 				width : 8vw;
@@ -78,6 +183,18 @@
 				align-items : center;
 				font-size : 2.5vh;
 				color : rgb(255,255,255);
+			}
+			.smallBottomBox{
+				width : 6vw;
+				height : 4vh;
+				border-radius : 3vh;
+				margin-right : 0.5vw;
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 1.5vh;
+				color : rgb(255,255,255);
+				background-color : rgb(89,89,89);
 			}
 			.typeBox{
 				width : 7vw;
@@ -175,17 +292,32 @@
 					+
 				</div>
 			</div>
-			<div class = "columnMenu" style = "height : 55vh; margin-top : 1.5vh; margin-bottom : 1.5vh;">
-				<div class = "orderInfoBox">
+			<div class = "columnMenu" style = "height : 55vh; margin-top : 1.5vh; margin-bottom : 1.5vh;" id = "listDisplay" >
+			</div>
+			<div class = "rowMenu" style = "margin-bottom : 1vh;">
+				<div class = "smallBottomBox" id = "Exemption0">
+					미해당
+				</div>
+				<div class = "smallBottomBox" id = "Exemption2">
+					전부면제
+				</div>
+				<div class = "smallBottomBox" id = "Exemption1">
+					일부면제
 				</div>
 			</div>
-			<div class = "orderInfoBox">
+			<div class = "orderInfoBox" style = "height: 8vh">
+				<div class = "infoSum" style = "justify-content : flex-start;">
+					계
+				</div>
+				<div class = "infoSum" style = "justify-content : flex-end;" id = "sumPrice">
+					10,000원
+				</div>
 			</div>
 			<div class = "rowMenu" style = "flex-direction : row-reverse">
-				<div class = "bottomBox" style = "background-color : rgb(255,50,50)">
+				<div class = "bottomBox" style = "background-color : rgb(255,50,50)" id = "bottomDelete">
 					삭제
 				</div>
-				<div class = "bottomBox" style = "background-color : rgb(128,128,128)">
+				<div class = "bottomBox" style = "background-color : rgb(128,128,128)" id = "bottomOK">
 					확인
 				</div>
 			</div>
@@ -193,13 +325,13 @@
 		<div style = "margin: 1vw;">
 			<div class = "rowMenu">
 			<!-- 유형박스 -->
-				<div class = "typeBox">
+				<div class = "typeBox" id = "type0">
 					본인
 				</div>
-				<div class = "typeBox">
+				<div class = "typeBox" id = "type1">
 					직계가족
 				</div>
-				<div class = "typeBox">
+				<div class = "typeBox" id = "type2">
 					이해관계
 				</div>
 			</div>
@@ -211,35 +343,35 @@
 					</div>
 					<div class = "smallContentsList">
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert0">
 								등본
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert1">
 								초본
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert2">
 								전입세대
 							</div>
 						</div>
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert3">
 								인감(일반)
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert4">
 								인감(부동산)
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert5">
 								인감(자동차)
 							</div>
 						</div>
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert6">
 								본인서명(일반)
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert7">
 								본인서명(부동산)
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert8">
 								본인서명(자동차)
 							</div>
 						</div>
@@ -251,24 +383,24 @@
 					</div>
 					<div class = "smallContentsList">
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert9">
 								가족관계
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert10">
 								기본증명
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert11">
 								혼인관계
 							</div>
 						</div>
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert12">
 								양자입양
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert13">
 								친양자입양
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert14">
 								제적
 							</div>
 						</div>
@@ -280,21 +412,21 @@
 					</div>
 					<div class = "smallContentsList">
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert15">
 								국세완납
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert16">
 								소득금액
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert17">
 								사업자등록
 							</div>
 						</div>
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert18">
 								과세표준
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert19">
 								기타
 							</div>
 						</div>
@@ -306,18 +438,24 @@
 					</div>
 					<div class = "smallContentsList">
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert20">
 								토지/임야대장
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert21">
 								건축물대장
 							</div>
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert22">
 								지적도
 							</div>
 						</div>
 						<div class = "rowMenu">
-							<div class = "smallContents">
+							<div class = "smallContents" id = "cert23">
+								농지대장(증지)
+							</div>
+							<div class = "smallContents" id = "cert24">
+								세목별(증지)
+							</div>
+							<div class = "smallContents" id = "cert25">
 								기타 민원
 							</div>
 						</div>
@@ -335,6 +473,157 @@
 		<div class = "sideButton" style = "bottom: 5vh; font-size:3.5vh">
 			123
 		</div>
+		<script>
+			let feeExemption = 0; // 0해당없음 1일부면제 2모두면제
+			let peopleType = 0; // 0 본인 1 가족 2 이해관계 
+			const certificateArray = [
+				{name: "등본", price: 400, feeType: 2},
+				{name: "초본", price: 400, feeType: 2}, 
+				{name: "전입세대", price: 400, feeType: 2},
+				{name: "인감(일반)", price: 600, feeType: 2},
+				{name: "인감(부동산)", price: 600, feeType: 2},
+				{name: "인감(자동차)", price: 600, feeType: 2},
+				{name: "본인서명(일반)", price: 0, feeType: 0},
+				{name: "본인서명(부동산)", price: 0, feeType: 0},
+				{name: "본인서명(자동차)", price: 0, feeType: 0},
+				{name: "가족관계", price: 1000, feeType: 1},
+				{name: "기본증명", price: 1000, feeType: 1},
+				{name: "혼인관계", price: 1000, feeType: 1},
+				{name: "양자입양", price: 1000, feeType: 1},
+				{name: "친양자입양", price: 1000, feeType: 1},
+				{name: "제적등본", price: 1000, feeType: 1},
+				{name: "국세완납", price: 0, feeType: 0},
+				{name: "소득금액", price: 0, feeType: 0},
+				{name: "사업자등록", price: 0, feeType: 0},
+				{name: "과세표준", price: 0, feeType: 0},
+				{name: "기타(무료)", price: 0, feeType: 0},
+				{name: "토지/임야대장", price: 500, feeType: 0},
+				{name: "건축물대장", price: 500, feeType: 0},
+				{name: "지적도", price: 700, feeType: 0},
+				{name: "농지대장(증지)", price: 500, feeType: 0},
+				{name: "세목별(증지)", price: 500, feeType: 0},
+				{name: "기타민원", price: 1, feeType: 0},
+				{name: "등본", price: 500, feeType: 2},
+				{name: "초본", price: 500, feeType: 2},
+				{name: "전입세대", price: 500, feeType: 2},
+			]; //29개
+			let isDisplay = new Array(300);
+			let outputArray = new Array(); // 증명번호, 가격, 수량, 위임여부, 완료여부
+			const typeToText = ["본인","직계가족","이해관계인"];
+			function displayOutput(){
+				let totalSum = 0;
+				document.getElementById("listDisplay").innerHTML = "";
+				for(let i=0; i<outputArray.length; i++){
+					if(feeExemption==0 || certificateArray[outputArray[i].no].feeType==0 ||(feeExemption==1 && certificateArray[outputArray[i].no].feeType!=2)){
+						outputArray[i].price = outputArray[i].quantity * certificateArray[outputArray[i].no].price;
+					}
+					else outputArray[i].price = 0;
+					totalSum += outputArray[i].price;
+					let infoBox = document.createElement("div");
+					infoBox.setAttribute("class", "orderInfoBox");
+					let infoChecker = document.createElement("div");
+					infoChecker.setAttribute("class", "infoChecker");
+					infoChecker.innerHTML = "V";
+					infoBox.appendChild(infoChecker);
+					let infoName = document.createElement("div");
+					infoName.setAttribute("class", "infoName");
+					infoName.innerHTML = certificateArray[outputArray[i].no].name;
+					infoBox.appendChild(infoName);
+					let infoType = document.createElement("div");
+					infoType.setAttribute("class", "infoType");
+					infoType.innerHTML = typeToText[outputArray[i].owner];
+					infoBox.appendChild(infoType);
+					let infoNum = document.createElement("div");
+					infoNum.setAttribute("class", "infoNum");
+					infoNum.innerHTML = outputArray[i].quantity+"부";
+					infoBox.appendChild(infoNum);
+					let infoMoney = document.createElement("div");
+					infoMoney.setAttribute("class", "infoMoney");
+					infoMoney.innerHTML = outputArray[i].price.toLocaleString()+"원";
+					infoBox.appendChild(infoMoney);
+					let infoPlus = document.createElement("div");
+					infoPlus.setAttribute("class", "infoPlus");
+					infoPlus.innerHTML = "+";
+					infoBox.appendChild(infoPlus);
+					let infoMinus = document.createElement("div");
+					infoMinus.setAttribute("class", "infoMinus");
+					infoMinus.innerHTML = "-";
+					infoBox.appendChild(infoMinus);
 
+					
+					document.getElementById("listDisplay").appendChild(infoBox);
+				}
+				document.getElementById("sumPrice").textContent = totalSum.toLocaleString()+"원";
+			}
+			function inputCertificate(num){
+				if(num<3 && peopleType==2) num+= 26;
+				if(isDisplay[peopleType*100+num]==-1){
+					isDisplay[peopleType*100+num] = outputArray.length;
+					outputArray.push({no:num, price: certificateArray[num].price, quantity:1, owner:peopleType, finish: false});
+				}
+				else{
+					++outputArray[isDisplay[peopleType*100+num]].quantity;
+				}
+				displayOutput()
+			};
+			function plusCertificate(outputNum){
+				++outputArray[outputNum].quantity;
+				displayOutput()
+			}
+			function minusCertificate(outputNum){
+				if(outputArray[outputNum].quantity>1){
+					--outputArray[outputNum].quantity;
+				}
+				else{
+					isDisplay[outputArray[outputNum].no + 100*outputArray[outputNum].owner] = -1;
+					for(let i=outputNum+1; i<outputArray.length; i++){
+						outputArray[i-1] = outputArray[i];
+						--isDisplay[outputArray[i].no + 100*outputArray[i].owner];
+					}
+					outputArray.pop();
+				}
+				displayOutput()
+			}
+			function checkCertificate(outputNum){
+				outputArray[outputNum].finish = !outputArray[outputNum].finish;
+				displayOutput()
+			}
+			function initIsDisplay(){
+				for(let i=0; i<300; i++){
+					isDisplay[i] = -1;
+				}
+			}
+			function setFee(feeNum){
+				document.getElementById("Exemption"+feeExemption).style.backgroundColor = "rgb(89,89,89)";
+				feeExemption = feeNum;
+				document.getElementById("Exemption"+feeNum).style.backgroundColor = "rgb(157,92,187)";
+				displayOutput()
+			}
+			function setType(typeNum){
+				document.getElementById("type"+peopleType).style.backgroundColor = "rgb(191,191,191)";
+				document.getElementById("type"+peopleType).style.color = "rgb(0,0,0)";
+				peopleType = typeNum;
+				document.getElementById("type"+typeNum).style.backgroundColor = "rgb(89,89,89)";
+				document.getElementById("type"+typeNum).style.color = "rgb(255,255,255)";
+			}
+			function initOutput(){
+				initIsDisplay();
+				outputArray = new Array();
+				setFee(0);
+				setType(0);
+				displayOutput()
+			}
+			for(let i=0; i<3; i++){
+				document.getElementById("Exemption"+i).addEventListener("click", () => setFee(i));
+				document.getElementById("type"+i).addEventListener("click", () => setType(i));
+			}
+			for(let i=0; i<26; i++){
+				document.getElementById("cert"+i).addEventListener("click", () => inputCertificate(i));
+			}
+			document.getElementById("bottomOK").addEventListener("click", initOutput);
+			document.getElementById("bottomDelete").addEventListener("click", initOutput);
+			initOutput();
+
+		</script>
 	</body>
 </html>
