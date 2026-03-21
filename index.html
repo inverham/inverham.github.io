@@ -45,6 +45,10 @@
 				height : 4vh;
 				border-radius : 2.5vh;
 				margin : 0.25vw;
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 1.5vh;
 			}
 			.peopleAdder{
 				background-color : rgb(191,191,191);
@@ -52,6 +56,10 @@
 				height : 4vh;
 				border-radius : 2vh;
 				margin : 0.25vw;
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 1.5vh;
 			}
 			.orderInfoBox{
 				width : 26vw;
@@ -68,7 +76,7 @@
 				display : flex;
 				justify-content : center;
 				align-items : center;
-				font-size : 3vh;
+				font-size : 2.5vh;
 				color : rgb(255,255,255);
 			}
 			.typeBox{
@@ -83,14 +91,88 @@
 				background-color : rgb(191,191,191);
 				color : rgb(0,0,0);
 			}
+			.smallContentsBox{
+				width : 60vw;
+				height : 19.5vh;
+				border-radius : 2vh;
+				margin-bottom : 2vh;
+				background-color : rgb(64,64,64);
+				position: relative;
+			}
+			.smallContentsTitle{
+				position : absolute;
+				left : 2.5vw;
+				top : 3vh;
+				width : 12vw;
+				height : 6vh;
+				border-radius : 3vh;
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 2.5vh;
+				color : rgb(255,255,255);
+				background-color : rgb(89,89,89);
+			}
+			.smallContentsList{
+				position : absolute;
+				left : 17vw;
+				top : 3vh;
+				width : 33.5vw;
+				height : 13.5vh;
+				overflow-y : auto;
+			}
+			.smallContentsList::-webkit-scrollbar{
+				width : 0.5vw;
+			}
+			.smallContentsList::-webkit-scrollbar-track{
+				background : transparent;
+			}
+			.smallContentsList::-webkit-scrollbar-button{
+				display: none;
+			}
+			.smallContentsList::-webkit-scrollbar-thumb{
+				background : #888;
+				border-radius: 0.25vw;
+			}
+			.smallContents{
+				width : 10vw;
+				height : 6vh;
+				margin-bottom: 0.75vh;
+				margin-right : 1vw;
+				border-radius : 0.5vh;
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 2vh;
+				color : rgb(0,0,0);
+				background-color : rgb(191,191,191);
+
+			}
+			.sideButton{
+				width : 9vw;
+				height: 9vw;
+				border-radius : 5vw;
+				position : absolute;
+				right : 5vw;
+				bottom : 20vh;
+				background-color : rgb(89,89,89);
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 5vh;
+				color : rgb(255,255,255);
+				box-shadow: 0.3vw 0.3vw 0.7vw 0 rgb(20,20,20) ;
+			}
 		</style>
 	</head>
 	<body>
 		<div class = "outputPannel">
 			<div class = "rowMenu">
 				<div class = "peopleSelector">
+					민원 1
 				</div>
 				<div class = "peopleAdder">
+					+
 				</div>
 			</div>
 			<div class = "columnMenu" style = "height : 55vh; margin-top : 1.5vh; margin-bottom : 1.5vh;">
@@ -100,16 +182,17 @@
 			<div class = "orderInfoBox">
 			</div>
 			<div class = "rowMenu" style = "flex-direction : row-reverse">
-				<div class = "bottomBox" style = "background-color : rgb(255,0,0)">
+				<div class = "bottomBox" style = "background-color : rgb(255,50,50)">
 					삭제
 				</div>
-				<div class = "bottomBox" style = "background-color : rgb(50,200,50)">
+				<div class = "bottomBox" style = "background-color : rgb(128,128,128)">
 					확인
 				</div>
 			</div>
 		</div>
 		<div style = "margin: 1vw;">
 			<div class = "rowMenu">
+			<!-- 유형박스 -->
 				<div class = "typeBox">
 					본인
 				</div>
@@ -120,8 +203,138 @@
 					이해관계
 				</div>
 			</div>
-			<div style = "height : 84vh; width : 60vw; margin-top : 1vw; border : 1px solid rgb(255,255,255) ">
+			<!-- 컨텐츠박스 -->
+			<div style = "height : 84vh; width : 60vw; margin-top : 1vw; ">
+				<div class = "smallContentsBox">
+					<div class = "smallContentsTitle">
+						주민등록
+					</div>
+					<div class = "smallContentsList">
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								등본
+							</div>
+							<div class = "smallContents">
+								초본
+							</div>
+							<div class = "smallContents">
+								전입세대
+							</div>
+						</div>
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								인감(일반)
+							</div>
+							<div class = "smallContents">
+								인감(부동산)
+							</div>
+							<div class = "smallContents">
+								인감(자동차)
+							</div>
+						</div>
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								본인서명(일반)
+							</div>
+							<div class = "smallContents">
+								본인서명(부동산)
+							</div>
+							<div class = "smallContents">
+								본인서명(자동차)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class = "smallContentsBox">
+					<div class = "smallContentsTitle">
+						가족관계
+					</div>
+					<div class = "smallContentsList">
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								가족관계
+							</div>
+							<div class = "smallContents">
+								기본증명
+							</div>
+							<div class = "smallContents">
+								혼인관계
+							</div>
+						</div>
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								양자입양
+							</div>
+							<div class = "smallContents">
+								친양자입양
+							</div>
+							<div class = "smallContents">
+								제적
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class = "smallContentsBox">
+					<div class = "smallContentsTitle">
+						fax 민원
+					</div>
+					<div class = "smallContentsList">
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								국세완납
+							</div>
+							<div class = "smallContents">
+								소득금액
+							</div>
+							<div class = "smallContents">
+								사업자등록
+							</div>
+						</div>
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								과세표준
+							</div>
+							<div class = "smallContents">
+								기타
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class = "smallContentsBox" style = "margin-bottom : 0;">
+					<div class = "smallContentsTitle">
+						기타
+					</div>
+					<div class = "smallContentsList">
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								토지/임야대장
+							</div>
+							<div class = "smallContents">
+								건축물대장
+							</div>
+							<div class = "smallContents">
+								지적도
+							</div>
+						</div>
+						<div class = "rowMenu">
+							<div class = "smallContents">
+								기타 민원
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+		<!--네이버한자-->
+		<a href = "https://hanja.dict.naver.com/#/main" target="_blank">
+			<div class = "sideButton">
+				漢
+			</div>
+		</a>
+		<!--숫자패드-->
+		<div class = "sideButton" style = "bottom: 5vh; font-size:3.5vh">
+			123
+		</div>
+
 	</body>
 </html>
