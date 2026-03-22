@@ -521,37 +521,55 @@
 					totalSum += outputArray[i].price;
 					let infoBox = document.createElement("div");
 					infoBox.setAttribute("class", "orderInfoBox");
+
 					let infoChecker = document.createElement("div");
 					infoChecker.setAttribute("class", "infoChecker");
+					infoChecker.setAttribute("data-id", i);
 					infoChecker.innerHTML = "V";
 					infoBox.appendChild(infoChecker);
+
 					let infoName = document.createElement("div");
 					infoName.setAttribute("class", "infoName");
+					infoName.setAttribute("data-id", i);
 					infoName.innerHTML = certificateArray[outputArray[i].no].name;
 					infoBox.appendChild(infoName);
+
 					let infoType = document.createElement("div");
 					infoType.setAttribute("class", "infoType");
+					infoType.setAttribute("data-id", i);
 					infoType.innerHTML = typeToText[outputArray[i].owner];
 					infoBox.appendChild(infoType);
+
 					let infoNum = document.createElement("div");
 					infoNum.setAttribute("class", "infoNum");
+					infoNum.setAttribute("data-id", i);
 					infoNum.innerHTML = outputArray[i].quantity+"부";
 					infoBox.appendChild(infoNum);
+
 					let infoMoney = document.createElement("div");
 					infoMoney.setAttribute("class", "infoMoney");
+					infoMoney.setAttribute("data-id", i);
 					infoMoney.innerHTML = outputArray[i].price.toLocaleString()+"원";
 					infoBox.appendChild(infoMoney);
+
 					let infoPlus = document.createElement("div");
 					infoPlus.setAttribute("class", "infoPlus");
+					infoPlus.setAttribute("data-id", i);
 					infoPlus.innerHTML = "+";
 					infoBox.appendChild(infoPlus);
+
 					let infoMinus = document.createElement("div");
 					infoMinus.setAttribute("class", "infoMinus");
+					infoMinus.setAttribute("data-id", i);
 					infoMinus.innerHTML = "-";
 					infoBox.appendChild(infoMinus);
-
 					
+					if(outputArray[i].finish){
+						infoBox.style.backgroundColor = "rgb(89,89,89)";
+					}
+
 					document.getElementById("listDisplay").appendChild(infoBox);
+					document.getElementById("listDisplay").scrollTop = document.getElementById("listDisplay").scrollHeight;
 				}
 				document.getElementById("sumPrice").textContent = totalSum.toLocaleString()+"원";
 			}
@@ -578,11 +596,11 @@
 					isDisplay[outputArray[outputNum].no + 100*outputArray[outputNum].owner] = -1;
 					for(let i=outputNum+1; i<outputArray.length; i++){
 						outputArray[i-1] = outputArray[i];
-						--isDisplay[outputArray[i].no + 100*outputArray[i].owner];
+						--isDisplay[outputArray[i-1].no + 100*outputArray[i-1].owner];
 					}
 					outputArray.pop();
 				}
-				displayOutput()
+				displayOutput();
 			}
 			function checkCertificate(outputNum){
 				outputArray[outputNum].finish = !outputArray[outputNum].finish;
@@ -613,6 +631,18 @@
 				setType(0);
 				displayOutput()
 			}
+			document.getElementById("listDisplay").addEventListener("click",e=>{
+				const id = parseInt(e.target.dataset.id);
+				if(e.target.classList.contains("infoChecker")){
+					checkCertificate(e.target.dataset.id);
+				}
+				else if(e.target.classList.contains("infoPlus")){
+					plusCertificate(e.target.dataset.id);
+				}
+				else if(e.target.classList.contains("infoMinus")){
+					minusCertificate(id);
+				}				
+			});
 			for(let i=0; i<3; i++){
 				document.getElementById("Exemption"+i).addEventListener("click", () => setFee(i));
 				document.getElementById("type"+i).addEventListener("click", () => setType(i));
