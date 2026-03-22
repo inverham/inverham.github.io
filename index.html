@@ -278,7 +278,36 @@
 				align-items : center;
 				font-size : 5vh;
 				color : rgb(255,255,255);
-				box-shadow: 0.3vw 0.3vw 0.7vw 0 rgb(20,20,20) ;
+				box-shadow: 0.3vw 0.3vw 0.7vw 0 rgb(20,20,20);
+			}
+			.numPad{
+				width : 27vw;
+				height: 45vw;
+				padding : 2vw;
+				border-radius : 5vw;
+				position : absolute;
+				right : 5vw;
+				background-color : rgb(89,89,89);
+				display : grid;
+				grid-template-columns : repeat(3,1fr);
+				grid-template-rows : repeat(5,1fr);
+				justify-items : center;
+				align-items : center;
+				font-size : 5vh;
+				color : rgb(255,255,255);
+				box-shadow: 0.3vw 0.3vw 0.7vw 0 rgb(20,20,20);
+				bottom: 5vh;
+			}
+			.numButton{
+				width : 7vw;
+				height: 7vw;
+				border-radius : 3.5vw;
+				background-color : rgb(0,0,0);
+				display : flex;
+				justify-content : center;
+				align-items : center;
+				font-size : 3vh;
+				color : rgb(255,255,255);
 			}
 		</style>
 	</head>
@@ -470,8 +499,10 @@
 			</div>
 		</a>
 		<!--숫자패드-->
-		<div class = "sideButton" style = "bottom: 5vh; font-size:3.5vh">
+		<div class = "sideButton" style = "bottom: 5vh; font-size:3.5vh" id = "numPadOpener">
 			123
+		</div>
+		<div id = "numPadContainer">
 		</div>
 		<script>
 			let feeExemption = 0; // 0해당없음 1일부면제 2모두면제
@@ -509,6 +540,9 @@
 			]; //29개
 			let isDisplay = new Array(300);
 			let outputArray = new Array(); // 증명번호, 가격, 수량, 위임여부, 완료여부
+			let buttonPressed = 0;
+			let tempNumber = 0;
+			let lastIndex;
 			const typeToText = ["본인","직계가족","이해관계인"];
 			function displayOutput(){
 				let totalSum = 0;
@@ -569,24 +603,32 @@
 					}
 
 					document.getElementById("listDisplay").appendChild(infoBox);
-					document.getElementById("listDisplay").scrollTop = document.getElementById("listDisplay").scrollHeight;
 				}
 				document.getElementById("sumPrice").textContent = totalSum.toLocaleString()+"원";
 			}
 			function inputCertificate(num){
+				if(tempNumber==0 && buttonPressed == 1){
+					minusCertificate(lastIndex);
+					displayOutput();
+				}
+				buttonPressed = 0;
+				tempNumber = 0;
 				if(num<3 && peopleType==2) num+= 26;
 				if(isDisplay[peopleType*100+num]==-1){
 					isDisplay[peopleType*100+num] = outputArray.length;
 					outputArray.push({no:num, price: certificateArray[num].price, quantity:1, owner:peopleType, finish: false});
+					lastIndex = outputArray.length-1;
 				}
 				else{
 					++outputArray[isDisplay[peopleType*100+num]].quantity;
+					lastIndex = isDisplay[peopleType*100+num];
 				}
-				displayOutput()
-			};
+				displayOutput();
+				document.getElementById("listDisplay").scrollTop = document.getElementById("listDisplay").scrollHeight;
+			}
 			function plusCertificate(outputNum){
 				++outputArray[outputNum].quantity;
-				displayOutput()
+				displayOutput();
 			}
 			function minusCertificate(outputNum){
 				if(outputArray[outputNum].quantity>1){
@@ -599,6 +641,9 @@
 						--isDisplay[outputArray[i-1].no + 100*outputArray[i-1].owner];
 					}
 					outputArray.pop();
+					if(lastIndex == outputArray.length){
+						--lastIndex;
+					};
 				}
 				displayOutput();
 			}
@@ -625,11 +670,79 @@
 				document.getElementById("type"+typeNum).style.color = "rgb(255,255,255)";
 			}
 			function initOutput(){
+				buttonPressed = 0;
+				tempNumber = 0;
+				lastIndex = 0;
 				initIsDisplay();
 				outputArray = new Array();
 				setFee(0);
 				setType(0);
 				displayOutput()
+			}
+			function openNumPad(){
+				buttonPressed = 0;
+				tempNumber = 0;
+				let numPad = document.createElement("div");
+				numPad.setAttribute("class", "numPad");
+				let deleteButton = document.createElement("div");
+				deleteButton.setAttribute("class","numButton");
+				deleteButton.style.gridColumn = "3/4";
+				deleteButton.style.gridRow = "1/2";
+				deleteButton.innerHTML = "←";
+				deleteButton.setAttribute("data-id", 11);
+				deleteButton.style.backgroundColor = "rgb(255,50,50)";
+				numPad.appendChild(deleteButton);
+			
+				let closeButton = document.createElement("div");
+				closeButton.setAttribute("class","numButton");
+				closeButton.style.gridColumn = "3/4";
+				closeButton.style.gridRow = "5/6";
+				closeButton.innerHTML = "V";
+				closeButton.setAttribute("data-id", 12);
+				closeButton.style.backgroundColor = "rgb(100,200,100)";
+				numPad.appendChild(closeButton);				
+
+				for(let i=1; i<10; i++){
+					let button = document.createElement("div");
+					button.setAttribute("class","numButton");
+					button.style.gridColumn = (i+3)%3+"/"+((i+3)%3+1);
+					button.style.gridRow = parseInt((i+5)/3)+"/"+parseInt((i+5)/3+1);
+					button.innerHTML = i;
+					button.setAttribute("data-id", i);
+					numPad.appendChild(button);	
+				}
+				let button = document.createElement("div");
+				button.setAttribute("class","numButton");
+				button.style.gridColumn = "2/3";
+				button.style.gridRow = "5/6";
+				button.innerHTML = "0";
+				button.setAttribute("data-id", 0);
+				numPad.appendChild(button);	
+				
+				document.getElementById("numPadContainer").appendChild(numPad);
+			}
+			function closeNumPad(){
+				if(tempNumber==0 && buttonPressed == 1){
+					minusCertificate(lastIndex);
+					displayOutput();
+				}
+				document.getElementById("numPadContainer").innerHTML = "";
+			}
+			function pressNum(num){
+				if(outputArray.length>0 && lastIndex <outputArray.length){
+					buttonPressed = 1;
+					tempNumber = parseInt(tempNumber);
+					num = parseInt(num);
+					if(num<10){
+						tempNumber*=10;
+						tempNumber+=num;
+					}
+					else if(num==11){
+						tempNumber = parseInt(tempNumber/10);
+					}
+					outputArray[lastIndex].quantity = tempNumber;
+					displayOutput();
+				}
 			}
 			document.getElementById("listDisplay").addEventListener("click",e=>{
 				const id = parseInt(e.target.dataset.id);
@@ -643,6 +756,29 @@
 					minusCertificate(id);
 				}				
 			});
+			document.getElementById("numPadContainer").addEventListener("click",e=>{
+				const id = parseInt(e.target.dataset.id);
+				if(id == 12){
+					closeNumPad();
+				}
+				else if(e.target.classList.contains("numButton")){
+					pressNum(parseInt(e.target.dataset.id));
+				}
+			});
+			window.addEventListener("keyup", (e) => {
+    				const key = e.key;
+				if (!isNaN(key) && key !== " ") {
+					pressNum(parseInt(key));
+    				} 
+    				else if (key === "Backspace") {
+   					pressNum(11);
+				} 
+				else if (key === "Enter") {
+					closeNumPad();
+					buttonPressed = 0;
+					tempNumber = 0;
+				}
+			});
 			for(let i=0; i<3; i++){
 				document.getElementById("Exemption"+i).addEventListener("click", () => setFee(i));
 				document.getElementById("type"+i).addEventListener("click", () => setType(i));
@@ -650,6 +786,7 @@
 			for(let i=0; i<26; i++){
 				document.getElementById("cert"+i).addEventListener("click", () => inputCertificate(i));
 			}
+			document.getElementById("numPadOpener").addEventListener("click", openNumPad);
 			document.getElementById("bottomOK").addEventListener("click", initOutput);
 			document.getElementById("bottomDelete").addEventListener("click", initOutput);
 			initOutput();
